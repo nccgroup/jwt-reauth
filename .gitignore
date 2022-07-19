@@ -1,0 +1,9 @@
+*.class
+*.log
+*.jar
+.idea
+releases/**/*
+.gradle
+.gradle/**/*
+build
+build/**/*

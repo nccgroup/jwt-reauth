@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+}
+
+group 'com.nccgroup'
+version '1.0.0'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'net.portswigger.burp.extender:burp-extender-api:2.3'
+    implementation 'javax.validation:validation-api:2.0.1.Final'
+}
+
+sourceSets {
+    main {
+        java {
+            srcDirs = ['src']
+        }
+    }
+}
+
+tasks.withType(Jar) {
+    destinationDirectory = file("$rootDir/releases")
+}
