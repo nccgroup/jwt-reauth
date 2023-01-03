@@ -13,9 +13,13 @@ limitations under the License.
 
 package com.nccgroup.jwtreauth.ui.scope;
 
+import com.nccgroup.jwtreauth.utils.UrlComparison;
+
 import javax.validation.constraints.NotNull;
 
 import javax.swing.table.AbstractTableModel;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.IntStream;
@@ -73,9 +77,19 @@ class ScopeTableModel extends AbstractTableModel {
         return IntStream.iterate(0, i -> i + 1)
                 .limit(getRowCount())
                 .filter(i -> (Boolean) inScopeCol.get(i))
-                .filter(i -> (Boolean) isPrefixCol.get(i)
-                        ? url.startsWith((String) URLCol.get(i))
-                        : url.equals(URLCol.get(i)))
+                .filter(i -> {
+                    if ((Boolean) isPrefixCol.get(i)) {
+                        return url.startsWith((String) URLCol.get(i));
+                    } else {
+                        try {
+                            // attempt to convert both values to a URL then
+                            return UrlComparison.compareEqual(new URL(url), new URL((String) URLCol.get(i)));
+                        } catch (MalformedURLException _e) {
+                            // revert to naive string comparison if an error occurred.
+                            return url.equals(URLCol.get(i));
+                        }
+                    }
+                })
                 .findAny()
                 .isPresent();
     }
