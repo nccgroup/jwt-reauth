@@ -149,10 +149,10 @@ public class ScopeTable extends JTable {
 
             // if the last row is blank fill in that row
             if (lastUrl.isBlank()) {
-                model.setRow(rows - 1, true, false, url);
+                model.setRow(rows - 1, true, true, url);
             } else {
                 // otherwise just add a new row
-                model.addRow(true, false, url);
+                model.addRow(true, true, url);
             }
         }
 
