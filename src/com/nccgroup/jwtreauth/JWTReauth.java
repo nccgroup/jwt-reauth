@@ -23,7 +23,7 @@ import com.nccgroup.jwtreauth.ui.state.TokenListenerStatePanel;
 import javax.swing.*;
 
 public class JWTReauth implements IBurpExtender {
-    private static final String VERSION = "1.0.0";
+    private static final String VERSION = "1.0.1";
 
     private IBurpExtenderCallbacks callbacks;
     private LogController logController;
